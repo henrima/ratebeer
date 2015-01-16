@@ -1,5 +1,5 @@
 == README  
-  
-herokuappi:  
-https://immense-badlands-5135.herokuapp.com/breweries  
-https://immense-badlands-5135.herokuapp.com/beers  
+#  
+# herokuappi:  
+# https://immense-badlands-5135.herokuapp.com/breweries  
+# https://immense-badlands-5135.herokuapp.com/beers  
