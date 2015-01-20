@@ -1,0 +1,81 @@
+dhcp-eduroam-hy-237-141:ratebeer henri$ rails g model Rating score:integer beer_id:integer
+      invoke  active_record
+      create    db/migrate/20150120131148_create_ratings.rb
+      create    app/models/rating.rb
+      invoke    test_unit
+      create      test/models/rating_test.rb
+      create      test/fixtures/ratings.yml
+dhcp-eduroam-hy-237-141:ratebeer henri$ rake db:migrate
+== 20150120131148 CreateRatings: migrating ====================================
+-- create_table(:ratings)
+   -> 0.0012s
+== 20150120131148 CreateRatings: migrated (0.0013s) ===========================
+
+dhcp-eduroam-hy-237-141:ratebeer henri$ rails g model Rating score:integer beer_id:integer
+      invoke  active_record
+   identical    /Users/henri/Desktop/Dropbox/TKT/RoR/projects/ratebeer/db/migrate/20150120131148_create_ratings.rb
+   identical    app/models/rating.rb
+      invoke    test_unit
+   identical      test/models/rating_test.rb
+   identical      test/fixtures/ratings.yml
+dhcp-eduroam-hy-237-141:ratebeer henri$ rails c
+Loading development environment (Rails 4.2.0)
+irb(main):001:0> b = Beer.first
+  Beer Load (0.2ms)  SELECT  "beers".* FROM "beers"  ORDER BY "beers"."id" ASC LIMIT 1
+=> #<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2015-01-15 22:11:49", updated_at: "2015-01-15 22:11:49">
+irb(main):002:0> b.ratings.create score:10
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 10], ["beer_id", 1], ["created_at", "2015-01-20 13:22:54.859746"], ["updated_at", "2015-01-20 13:22:54.859746"]]
+   (0.7ms)  commit transaction
+=> #<Rating id: 1, score: 10, beer_id: 1, created_at: "2015-01-20 13:22:54", updated_at: "2015-01-20 13:22:54">
+irb(main):003:0> b.ratings.create score:21
+   (0.2ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 21], ["beer_id", 1], ["created_at", "2015-01-20 13:22:58.401841"], ["updated_at", "2015-01-20 13:22:58.401841"]]
+   (2.8ms)  commit transaction
+=> #<Rating id: 2, score: 21, beer_id: 1, created_at: "2015-01-20 13:22:58", updated_at: "2015-01-20 13:22:58">
+irb(main):004:0> b.ratings.create score:15
+   (0.2ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 15], ["beer_id", 1], ["created_at", "2015-01-20 13:23:00.713271"], ["updated_at", "2015-01-20 13:23:00.713271"]]
+   (2.4ms)  commit transaction
+=> #<Rating id: 3, score: 15, beer_id: 1, created_at: "2015-01-20 13:23:00", updated_at: "2015-01-20 13:23:00">
+irb(main):005:0> Brewery
+=> Brewery(id: integer, name: string, year: integer, created_at: datetime, updated_at: datetime)
+irb(main):006:0> Brewery
+Brewery
+irb(main):006:0> Brewery.new name:"BrewDog", year:2007
+=> #<Brewery id: nil, name: "BrewDog", year: 2007, created_at: nil, updated_at: nil>
+irb(main):007:0> b = Brewery.new name:"BrewDog", year:2007
+=> #<Brewery id: nil, name: "BrewDog", year: 2007, created_at: nil, updated_at: nil>
+irb(main):008:0> b.save
+   (0.1ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2015-01-20 13:30:30.421472"], ["updated_at", "2015-01-20 13:30:30.421472"]]
+   (5.6ms)  commit transaction
+=> true
+irb(main):009:0> Beer.new name:"Punk IPA", style:IPA
+NameError: uninitialized constant IPA
+	from (irb):9
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/railties-4.2.0/lib/rails/commands/console.rb:110:in `start'
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/railties-4.2.0/lib/rails/commands/console.rb:9:in `start'
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/railties-4.2.0/lib/rails/commands/commands_tasks.rb:68:in `console'
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/railties-4.2.0/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/railties-4.2.0/lib/rails/commands.rb:17:in `<top (required)>'
+	from /Users/henri/Desktop/Dropbox/TKT/RoR/projects/ratebeer/bin/rails:8:in `<top (required)>'
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from /Users/henri/.rbenv/versions/2.2.0/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from -e:1:in `<main>'
+irb(main):010:0> Beer.new name:"Punk IPA", style:"IPA"
+=> #<Beer id: nil, name: "Punk IPA", style: "IPA", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):011:0> b = Beer.new name:"Punk IPA", style:"IPA"
+=> #<Beer id: nil, name: "Punk IPA", style: "IPA", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):012:0> b.save
+   (0.1ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "beers" ("name", "style", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["created_at", "2015-01-20 13:31:22.557604"], ["updated_at", "2015-01-20 13:31:22.557604"]]
+   (5.3ms)  commit transaction
+=> true
+irb(main):013:0> b = Beer.new name:"Nanny State", style:"lowalcohol"
+=> #<Beer id: nil, name: "Nanny State", style: "lowalcohol", brewery_id: nil, created_at: nil, updated_at: nil>
+irb(main):014:0> b.save
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "beers" ("name", "style", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["created_at", "2015-01-20 13:31:45.340495"], ["updated_at", "2015-01-20 13:31:45.340495"]]
+   (2.5ms)  commit transaction
+=> true
