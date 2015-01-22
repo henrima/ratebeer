@@ -1,6 +1,12 @@
 source 'https://rubygems.org'
 
 group :development, :test do
+  gem "better_errors"
+
+  #...
+end
+
+group :development, :test do
   gem 'sqlite3'
 end
 
