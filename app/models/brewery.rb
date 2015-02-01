@@ -5,8 +5,13 @@ class Brewery < ActiveRecord::Base
   has_many :ratings, through: :beers
 
   validates :year, numericality: {only_integer: true, 
-                                  greater_than_or_equal_to: 1042,
-                                  less_than_or_equal_to: Date.today.year}
+                                  greater_than_or_equal_to: 1042}
+
+  validate :year, :validate_current_year
+                                
+
+
+
 
   def print_report
     puts name
@@ -21,6 +26,12 @@ class Brewery < ActiveRecord::Base
 
   def to_s
     self.name
+  end
+
+  def validate_current_year
+    if year > Date.today.year
+      errors.add(:year, "brewery cannot be from da future")
+    end
   end
   
 end
