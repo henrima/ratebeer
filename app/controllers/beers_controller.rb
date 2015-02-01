@@ -32,6 +32,7 @@ class BeersController < ApplicationController
   # POST /beers
   # POST /beers.json
   def create
+    breweries_and_styles
     @beer = Beer.new(beer_params)
 
     respond_to do |format|

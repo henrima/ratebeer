@@ -6,11 +6,19 @@
     <strong>Ratings average: </strong><%= @user.average_rating %><br>
   	<br>
   <strong>Ratings:</strong>
- 	<% @user.ratings.each do |rating| %>
-   		<li> <%= rating %> <%= link_to 'delete', rating_path(rating.id), method: :delete, data: { confirm: 'Are you sure?' } %> </li>
- 	<% end %>
+  <ul>
+    <% @user.ratings.each do |rating| %>
+      <li>
+        <%= rating %>
+        <% if @user == current_user %>
+            <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', users_path %>

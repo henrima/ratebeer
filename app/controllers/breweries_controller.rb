@@ -37,7 +37,7 @@ class BreweriesController < ApplicationController
         format.json { render json: @brewery.errors, status: :unprocessable_entity }
       end
     end
-    redirect_to beers_path
+
   end
 
   # PATCH/PUT /breweries/1
