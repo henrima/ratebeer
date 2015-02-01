@@ -10,9 +10,6 @@ class Brewery < ActiveRecord::Base
   validate :year, :validate_current_year
                                 
 
-
-
-
   def print_report
     puts name
     puts "established at year #{year}"
