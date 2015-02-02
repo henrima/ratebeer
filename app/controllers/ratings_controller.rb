@@ -12,18 +12,12 @@ class RatingsController < ApplicationController
       @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
 
       if not current_user.nil? 
-        if @rating.save
           current_user.ratings << @rating
           redirect_to user_path current_user
-        else
-         @beers = Beer.all
-         render :new
-        end
-      else 
-        @beers = Beer.all
-        redirect_to new_rating_path, notice: 'User not logged in (rating was not saved)'
-      end 
-  	
+      else
+        redirect_to new_rating_path, notice: 'User not logged in (rating was not saved)'  
+      end   
+    
     end
 
   def destroy
