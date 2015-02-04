@@ -6,8 +6,10 @@ group :development, :test do
   #...
 end
 
-group :development, :test do
+group :development, :test do  
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'  
 end
 
 group :production do
