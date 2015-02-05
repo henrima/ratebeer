@@ -5,6 +5,7 @@ class Beer < ActiveRecord::Base
 	has_many :raters, -> { uniq }, through: :ratings, source: :user
 
  	validates :name, presence: true
+ 	validates :style, presence: true
 
 	def avarage_rating
 		ratings = Rating.all.where beer_id:self.id
