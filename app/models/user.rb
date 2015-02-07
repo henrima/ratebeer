@@ -20,4 +20,11 @@ class User < ActiveRecord::Base
     validates :password, length: { minimum: 4 }
 
 
+
+    def favorite_beer
+    	if ratings.nil? 
+    		return nil
+    	end
+    end
+    	
 end
