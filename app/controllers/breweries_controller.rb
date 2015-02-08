@@ -1,5 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_signed_in, except: [:index, :show]  
  # before_filter :authenticate, only: [:destroy]
 
   # GET /breweries
