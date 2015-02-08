@@ -1,0 +1,19 @@
+language: ruby
+
+rvm:
+ - 2.0.0
+
+script:
+ - bundle exec rake db:migrate --trace
+ - RAILS_ENV=test bundle exec rake db:migrate --trace
+ - bundle exec rake db:test:prepare
+ - bundle exec rspec -fd spec/
+
+ deploy:
+  provider: heroku
+  api_key: "39b07cc5-8328-449e-89cf-55c6a0cfd233"
+  app: immense-badlands-5135
+  run: 
+  	- "rake db:migrate"
+    - restart
+    - "rake cleanup"  	

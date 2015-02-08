@@ -7,6 +7,8 @@ class Brewery < ActiveRecord::Base
   validates :year, numericality: {only_integer: true, 
                                   greater_than_or_equal_to: 1042}
 
+  validates :name, presence: true                                
+
   validate :year, :validate_current_year
                                 
 

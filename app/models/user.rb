@@ -21,10 +21,31 @@ class User < ActiveRecord::Base
 
 
 
-    def favorite_beer
-    	if ratings.nil? 
-    		return nil
-    	end
-    end
-    	
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+  
+  #def favorite_style 
+  #  return nil if ratings.empty?
+  #  return highest_rated_style
+  #end
+
+
+  #def favorite_brewery
+  #	return nil if ratings.empty?
+  #	
+  #end
+
+
+
+  #def highest_rated_style
+  #	t = Hash[:style => "avg", :count => 0]
+  #	User.all.each{ |u| u.beers.each{ |b| t[b.style] =  b.average_rating} }	
+  #	averages = {}
+  #	user.beers.all.each do |b| 
+  #  end	
+  #  byebug
+  #end
+
 end

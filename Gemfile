@@ -1,18 +1,19 @@
 source 'https://rubygems.org'
 
-group :development, :test do
-  gem "better_errors"
-
-  #...
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'  
+  gem 'simplecov', require: false  
 end
 
+
 group :development, :test do  
+  gem 'better_errors'  
   gem 'sqlite3'
-  gem 'rspec-rails', '~> 3.0'
-  gem 'capybara'  
+  gem 'rspec-rails', '~> 3.0' 
   gem 'guard'
   gem 'guard-rspec'
-  gem 'factory_girl_rails'
 end
 
 group :production do
