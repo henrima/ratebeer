@@ -1,20 +1,15 @@
 language: ruby
-
 rvm:
- - 2.0.0
-
+- 2.0.0
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
-
- deploy:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
   provider: heroku
-  api_key: "39b07cc5-8328-449e-89cf-55c6a0cfd233"
+  api_key:
+    secure: QrqEm60bxXc9S7Jx7NOtlbNMVM+E7M73DtS/wzWR/GQvXQjZBaOCW/dtYS9PojajwzQ8S9k59j2MuyaoK5I3FozKvCetic727+2m3fBBUkfACXzzqomvDLrO14wdBY3vM8xjerApr0OtnYWo94r2uOQx+HwVfb/LlI3zvX51mtU=
   app: immense-badlands-5135
-  run: 
-  	- "rake db:migrate"
-    - restart
-    - "rake cleanup"
-      	
+  on:
+    repo: henrima/ratebeer
