@@ -4,9 +4,12 @@ require 'rails_helper'
 describe "Beer" do
   before :each do
     FactoryGirl.create :beer
+    FactoryGirl.create :user
   end
 
-  it "can be created with valid name through web page" do
+  it "can be created with valid name through web page when logged in" do
+    sign_in(username:"Pekka", password:"Foobar1")
+
   	visit new_beer_path
     fill_in('beer[name]', with:'Testiolut IVA')
 
@@ -15,7 +18,9 @@ describe "Beer" do
     }.to change{Beer.count}.from(1).to(2)
   end
 
-  it "returns to new_beer with correct error if no valid values" do
+  it "returns to new_beer with correct error if no valid values when logged in" do
+    sign_in(username:"Pekka", password:"Foobar1")
+
   	visit new_beer_path
     fill_in('beer[name]', with:'')
     click_button "Create Beer"
