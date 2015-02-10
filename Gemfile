@@ -23,6 +23,9 @@ end
 
 ruby '2.2.0'
 
+#beermapping.com hakua varten
+gem 'httparty'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
