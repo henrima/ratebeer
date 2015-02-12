@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :breweries
 
+
   root 'breweries#index'
 
   get 'kaikki_bisset', to: 'beers#index'
@@ -18,8 +19,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
-  get 'places' to: 'places#index' 
-  post 'places' to: 'places#search'
+  get 'places', to: 'places#index' 
+  post 'places', to: 'places#search'
 
 
   #get 'ratings', to: 'ratings#index'

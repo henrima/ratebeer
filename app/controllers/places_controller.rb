@@ -1,13 +1,12 @@
-class ApplicationController < ActionController::Base
+class PlacesController < ActionController::Base
 
 	def index
 
 	end
 
-	def saerch
+	def search
 		params[:city]
-		#haku beer_mappingiin
-		
+   		render :index
 	end	
 	
 end

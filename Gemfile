@@ -23,7 +23,7 @@ end
 
 ruby '2.2.0'
 
-#beermapping.com hakua varten
+#beermapping.com hakuja varten
 gem 'httparty'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
