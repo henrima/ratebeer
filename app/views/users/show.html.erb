@@ -4,9 +4,22 @@
   	<strong>Username: </strong><%= @user.username %><br>  
     <strong>Number of ratings: </strong><%= @user.ratings.count %><br>
     <strong>Ratings average: </strong><%= @user.average_rating %><br>
-  	<br>
+  	<strong><% unless @user.ratings.empty? %> Favorite style: <%= @user.favorite_style %><% end %>
+    <strong><% unless @user.ratings.empty? %> Favorite brewery: <%= @user.favorite_brewery %><% end %>      
+    <strong><% unless @user.ratings.empty? %> Favorite beer: <%= @user.favorite_beer %><% end %>         
+    <br>
+
+
+<p>
+  <% if @user.ratings.empty? %>
+    Beer has not yet been rated!
+  <% else %>
+    Has <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %>
+  <% end %>
+</p>
   <strong>Ratings:</strong>
   <ul>
+  <% unless @user.ratings.empty? %> 
     <% @user.ratings.each do |rating| %>
       <li>
         <%= rating %>
@@ -15,6 +28,7 @@
         <% end %>
       </li>
     <% end %>
+  <% end %>
   </ul>
 
 </p>
