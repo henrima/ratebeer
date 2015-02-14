@@ -1,9 +1,12 @@
 class PlacesController < ApplicationController
-
+  before_action :set_place, only: [:show]
  
   def index
   end
 
+  def show
+    render :show
+  end
 
   def search
     @places = BeermappingApi.places_in(params[:city])
@@ -14,5 +17,9 @@ class PlacesController < ApplicationController
     end
   end
 
+    def set_place
+      places = Rails.cache.read params[:city]
+      @place = places.detect {|p| p.id.to_s == params[:id].to_s}
+    end
 
 end

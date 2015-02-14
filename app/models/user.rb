@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def average_for_style(style)
-    style_ratings = ratings.find_all{ |r| r.beer.style == style}
+    style_ratings = ratings.find_all{ |r| r.beer.style == style}   
     style_ratings.map{ |r| r.score }.sum / style_ratings.count.to_f
   end
 

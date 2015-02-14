@@ -4,11 +4,9 @@
   	<strong>Username: </strong><%= @user.username %><br>  
     <strong>Number of ratings: </strong><%= @user.ratings.count %><br>
     <strong>Ratings average: </strong><%= @user.average_rating %><br>
-  	<strong><% unless @user.ratings.empty? %> Favorite style: <%= @user.favorite_style %><% end %>
-    <strong><% unless @user.ratings.empty? %> Favorite brewery: <%= @user.favorite_brewery %><% end %>      
-    <strong><% unless @user.ratings.empty? %> Favorite beer: <%= @user.favorite_beer %><% end %>         
-    <br>
-
+  	<strong><% unless @user.ratings.empty? %> Favorite style: </strong><%= @user.favorite_style %><% end %><br>
+    <strong><% unless @user.ratings.empty? %> Favorite brewery: </strong><%= @user.favorite_brewery %><% end %><br>      
+    <strong><% unless @user.ratings.empty? %> Favorite beer: </strong><%= @user.favorite_beer %><% end %><br>
 
 <p>
   <% if @user.ratings.empty? %>

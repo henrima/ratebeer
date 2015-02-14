@@ -15,7 +15,7 @@ class RatingsController < ApplicationController
           current_user.ratings << @rating
           redirect_to user_path current_user
       else
-        redirect_to new_rating_path, notice: 'User not logged in (rating was not saved)'  
+        redirect_to signin_path, notice: 'User not logged in (rating was not saved)'  
       end   
     
     end

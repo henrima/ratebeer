@@ -4,23 +4,17 @@ Rails.application.routes.draw do
   resources :beer_clubs
 
   resources :users
-
-  resources :beers
-
-  resources :breweries
-
-
-  root 'breweries#index'
-
-  get 'kaikki_bisset', to: 'beers#index'
-
   get 'signup', to: 'users#new'
 
-  get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy'
+  resources :beers
+  get 'kaikki_bisset', to: 'beers#index'
 
-  get 'places', to: 'places#index' 
+  resources :breweries
+  root 'breweries#index'
+
+  resources :places, only:[:index]
   post 'places', to: 'places#search'
+  get 'places/:city/:id', to: 'places#show', as: :place
 
 
   #get 'ratings', to: 'ratings#index'
@@ -31,6 +25,8 @@ Rails.application.routes.draw do
 
   #sessio
   resource :session, only: [:new, :create, :delete]
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
