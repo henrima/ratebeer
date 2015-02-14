@@ -7,6 +7,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'simplecov'
 SimpleCov.start('rails')
+require 'webmock/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

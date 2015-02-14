@@ -1,4 +1,8 @@
 Rails.application.configure do
+
+  # cache käyttämään keskusmuistia
+  config.cache_store = :memory_store
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
