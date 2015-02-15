@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+
   def index
   	    @ratings = Rating.all
   end
@@ -6,16 +7,19 @@ class RatingsController < ApplicationController
 	def new
     	@rating = Rating.new
     	@beers = Beer.all
-  	end
+ 	end
 
   	def create
       @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
 
-      if not current_user.nil? 
+      if current_user.nil? 
+        redirect_to signin_path, notice:'User not logged in (rating was not saved)'  
+      elsif @rating.save
           current_user.ratings << @rating
           redirect_to user_path current_user
       else
-        redirect_to signin_path, notice: 'User not logged in (rating was not saved)'  
+        @beers = Beer.all
+        render:new
       end   
     
     end

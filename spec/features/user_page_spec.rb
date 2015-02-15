@@ -33,7 +33,7 @@ describe "User page" do
 
       click_link('delete')
       
-      expect(page).to have_content "Beer has not yet been rated!"
+      expect(page).to have_content "User has not given any ratings!"
     end
 
   end

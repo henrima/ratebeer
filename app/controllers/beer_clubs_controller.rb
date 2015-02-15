@@ -11,6 +11,14 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
+    memberships = Membership.where user_id:session[:user_id], beer_club_id:@beer_club.id
+    if memberships.empty?
+      @membership = Membership.new
+      @membership.beer_club_id = @beer_club.id
+      @membership.user_id = session[:user_id]
+    else
+      @membership = memberships.first
+    end   
   end
 
   # GET /beer_clubs/new

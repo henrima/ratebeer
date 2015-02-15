@@ -10,7 +10,7 @@
 
 <p>
   <% if @user.ratings.empty? %>
-    Beer has not yet been rated!
+    User has not given any ratings!
   <% else %>
     Has <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %>
   <% end %>

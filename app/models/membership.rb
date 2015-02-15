@@ -3,5 +3,5 @@ class Membership < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, uniqueness: {scope: :beer_club_id,
-  									message: "User already in this beerclub"}
+  									message: "User is already in this beerclub"}
 end
