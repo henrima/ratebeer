@@ -29,9 +29,14 @@ FactoryGirl.define do
   end
 
   factory :beer do
-    sequence(:name) { |b| "beer#{b}" }
+    name "Testiolut IVA"
     brewery
-    style "Lager"
+    style
+  end
+
+  factory :style do
+    name "Jallumainen"
+    description "hedelmaisan aromikas"
   end
 
 end

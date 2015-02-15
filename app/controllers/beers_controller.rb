@@ -27,7 +27,7 @@ class BeersController < ApplicationController
 
   def breweries_and_styles
     @breweries = Brewery.all
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+    @styles = Style.all
   end
 
 
@@ -38,7 +38,7 @@ class BeersController < ApplicationController
 
     respond_to do |format|
       if @beer.save
-        format.html { redirect_to @beer, notice: 'Beer was successfully created.' }
+        format.html { redirect_to beers_path, notice: 'Beer was successfully created.' }
         format.json { render :show, status: :created, location: @beer }
       else
         format.html { render :new }
@@ -79,6 +79,6 @@ class BeersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def beer_params
-      params.require(:beer).permit(:name, :style, :brewery_id)
+      params.require(:beer).permit(:name, :style_id, :brewery_id)
     end
 end
