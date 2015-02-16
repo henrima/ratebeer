@@ -1,10 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing ratings</h1>
 <p> Number of ratings: <%= @ratings.count %> </p>
 
 
-<table>
+<table class="table table-hover">
   <tbody>
 	<ul>
  	<% @ratings.each do |rating| %>
@@ -14,6 +12,6 @@
   </tbody>
 </table>
 
-  	<%= link_to 'New Rating', '/ratings/new' %>
+  	<%= link_to 'New Rating', '/ratings/new' if not current_user.nil? %>
 
 <br>

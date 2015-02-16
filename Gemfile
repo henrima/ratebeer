@@ -15,6 +15,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0' 
   gem 'guard'
   gem 'guard-rspec'
+  gem 'rails_layout'
 end
 
 group :production do
@@ -23,6 +24,9 @@ group :production do
 end
 
 ruby '2.2.0'
+
+#bootstrap
+gem 'bootstrap-sass'
 
 #beermapping.com hakuja varten
 gem 'httparty'
