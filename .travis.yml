@@ -1,10 +1,10 @@
 language: ruby
 rvm:
 - 2.2.0
-- APIKEY="23e5d3518fa5ffb4fc3e64b19ca54863"
 script:
 - bundle exec rake db:migrate --trace
 - RAILS_ENV=test bundle exec rake db:migrate --trace
+- APIKEY="23e5d3518fa5ffb4fc3e64b19ca54863"
 - bundle exec rake db:test:prepare
 - bundle exec rspec -fd spec/
 deploy:

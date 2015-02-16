@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :breweries
   root 'breweries#index'
 
-  resources :places, only:[:index]
+  get 'places', to:'places#index'
   post 'places', to: 'places#search'
   get 'places/:city/:id', to: 'places#show', as: :place
 

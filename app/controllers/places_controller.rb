@@ -17,8 +17,9 @@ class PlacesController < ApplicationController
     end
   end
 
+  private
     def set_place
-      places = Rails.cache.read params[:city]
+      places = BeermappingApi.places_in(params[:city])
       @place = places.detect {|p| p.id.to_s == params[:id].to_s}
     end
 
