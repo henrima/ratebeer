@@ -11,6 +11,7 @@ deploy:
   provider: heroku
   api_key:
     secure: QrqEm60bxXc9S7Jx7NOtlbNMVM+E7M73DtS/wzWR/GQvXQjZBaOCW/dtYS9PojajwzQ8S9k59j2MuyaoK5I3FozKvCetic727+2m3fBBUkfACXzzqomvDLrO14wdBY3vM8xjerApr0OtnYWo94r2uOQx+HwVfb/LlI3zvX51mtU=
+  	APIKEY: 23e5d3518fa5ffb4fc3e64b19ca54863
   app: immense-badlands-5135
   on:
     repo: henrima/ratebeer
