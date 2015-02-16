@@ -11,6 +11,8 @@ class Brewery < ActiveRecord::Base
 
   validate :year, :validate_current_year
                                 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
 
   def print_report
     puts name
