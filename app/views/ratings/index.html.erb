@@ -1,16 +1,8 @@
-<h1>Listing ratings</h1>
-<p> Number of ratings: <%= @ratings.count %> </p>
+	<h1>Bestest of the best</h1>
+	<p> Number of ratings: <%= @ratings.count %> </p>
 
 
-<table class="table table-hover">
-  <tbody>
-	<ul>
- 	<% @ratings.each do |rating| %>
-   		<li> <%= rating %> <%= link_to rating.user.username, user_path(rating.user.id) %> </li>
- 	<% end %>
-	</ul>
-  </tbody>
-</table>
+	<%= render 'top', breweries: @active_breweries %>
 
   	<%= link_to 'New Rating', '/ratings/new' if not current_user.nil? %>
 
