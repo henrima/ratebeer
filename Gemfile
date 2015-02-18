@@ -4,7 +4,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'  
-  gem 'simplecov', require: false 
+  gem 'simplecov', '~> 0.9.1', require: false 
   gem 'webmock'   
 end
 

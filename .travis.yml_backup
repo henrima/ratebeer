@@ -9,7 +9,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: hzgk7pbL2Df8MXnsF1lqgGqSCedXG6RT+2GhAgM/zSy4urAW1wKjGSkA+KIa5EERCzfesNjvjxdSK0wDC16tgPwJxvlmXwVWx64m6nvkE/NaXGJz1HkBXnIoh2LvqtVTNiq5PYqC6x71Hmnr5tYj6ovpgYQ5rz3v773QhOl1qXQ=
+    secure: QrqEm60bxXc9S7Jx7NOtlbNMVM+E7M73DtS/wzWR/GQvXQjZBaOCW/dtYS9PojajwzQ8S9k59j2MuyaoK5I3FozKvCetic727+2m3fBBUkfACXzzqomvDLrO14wdBY3vM8xjerApr0OtnYWo94r2uOQx+HwVfb/LlI3zvX51mtU=
   app: cryptic-headland-6363
   on:
     repo: henrima/ratebeer
