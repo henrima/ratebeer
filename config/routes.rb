@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   resources :beers
   get 'kaikki_bisset', to: 'beers#index'
 
-  resources :breweries
+  #resources :breweries
   root 'breweries#index'
 
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  
   get 'places', to:'places#index'
   post 'places', to: 'places#search'
   get 'places/:city/:id', to: 'places#show', as: :place

@@ -35,10 +35,13 @@ class Brewery < ActiveRecord::Base
     end
   end
 
- def self.top(n)
-   sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -(b.average_rating||0) }
-   # palauta listalta parhaat n kappaletta
-   # miten? ks. http://www.ruby-doc.org/core-2.1.0/Array.html
- end  
-  
+  def self.top(n)
+    unless Brewery.all.empty?
+      sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -(b.average_rating||0) }
+      sorted_by_rating_in_desc_order.first(n)
+    else
+      return []
+    end  
+  end
+
 end

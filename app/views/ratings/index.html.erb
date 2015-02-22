@@ -1,9 +1,14 @@
-	<h1>Bestest of the best</h1>
-	<p> Number of ratings: <%= @ratings.count %> </p>
+<h1>Bestest of the best</h1>
+	<br><br>
+	<div class="row">
+  		<div class="col-md-4"><strong>Top beers</strong><%= render 'list', x: @top_beers %></div>
+  		<div class="col-md-4"><strong>Top reweries</strong><%= render 'list', x: @top_breweries %></div>
+  		<div class="col-md-4"><strong>Top styles</strong><%= render 'list', x: @top_styles %></div>
+  	</div>
+  	<br><br>
+  	<div class="row">
+  		<div class="col-md-12"><strong>Most active users</strong><%= render 'list', x: @most_active_users %></div>
+  	</div>
+  	<br><br>
+<%= link_to 'New Rating', '/ratings/new' if not current_user.nil? %>
 
-
-	<%= render 'top', breweries: @active_breweries %>
-
-  	<%= link_to 'New Rating', '/ratings/new' if not current_user.nil? %>
-
-<br>

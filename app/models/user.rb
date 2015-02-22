@@ -64,5 +64,14 @@ class User < ActiveRecord::Base
     brewery_ratings.map{ |r| r.score}.sum / brewery_ratings.count.to_f
   end
 
+  def self.most_active(n)
+    unless User.all.empty?
+      sorted_by_rating_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count||0) }
+      sorted_by_rating_in_desc_order.first(n)
+    else
+      return []
+    end
+  end
+
 
 end

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_admin, only: [:toggle_activity]
+  before_action :ensure_that_not_deactivated, only: [:toggle_activity]
 
   # GET /users
   # GET /users.json

@@ -2,9 +2,15 @@
   <tbody>
   <% x.each do |y| %>
       <tr>
-        <td><%= y.name %></td>
-        <td><%= y.average_rating %></td>
-        <td></td>
+
+      	<% if y.instance_of? User %>
+      		<td><%= y.username %></td>        	
+      		<td><%= y.ratings.count %></td>
+        <% else %>
+        	<td><%= y.name %></td>
+            <td><%= y.average_rating %></td>  	
+        <% end %>
+
       </tr>
   <% end %>
   </tbody>
