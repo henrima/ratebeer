@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :user do
     username "Pekka"
     password "Foobar1"
@@ -14,29 +13,18 @@ FactoryGirl.define do
     score 20
   end
 
-  factory :rating3, class: Rating do
-    score 25
-  end
-
   factory :brewery do
     name "anonymous"
     year 1900
   end
 
-  factory :brewery2 do
-    name "paras panimo"
-    year 2015
+  factory :style do
+    name "Lager"
   end
 
   factory :beer do
-    name "Testiolut IVA"
+    name "anonymous"
     brewery
     style
   end
-
-  factory :style do
-    name "Jallumainen"
-    description "hedelmaisan aromikas"
-  end
-
 end

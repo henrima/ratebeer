@@ -1,37 +1,32 @@
 Rails.application.routes.draw do
+  resources :styles
+
   resources :memberships
 
   resources :beer_clubs
 
-  resources :users
+  resources :users do
+    post 'toggle_frozen', on: :member
+  end
+
   get 'signup', to: 'users#new'
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
+
+  resource :session, only: [:new, :create, :delete]
 
   resources :beers
-  get 'kaikki_bisset', to: 'beers#index'
-
-  #resources :breweries
-  root 'breweries#index'
 
   resources :breweries do
     post 'toggle_activity', on: :member
   end
-  
-  get 'places', to:'places#index'
-  post 'places', to: 'places#search'
-  get 'places/:city/:id', to: 'places#show', as: :place
 
-
-  #get 'ratings', to: 'ratings#index'
-  #get 'ratings/new', to: 'ratings#new'
-  #post 'ratings', to: 'ratings#create'
   resources :ratings, only: [:index, :new, :create, :destroy]
 
-  #sessio
-  resource :session, only: [:new, :create, :delete]
-  get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy'
+  resources :places, only: [:index, :show]
+  post 'places', to:'places#search'
 
-
+  root 'breweries#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,77 +1,74 @@
 class User < ActiveRecord::Base
-	include RatingAverage
+  include RatingAverage
 
-	has_secure_password
+  has_secure_password
 
-	has_many :ratings, dependent: :destroy
-	has_many :beers, through: :ratings
+  has_many :ratings, dependent: :destroy
+  has_many :beers, through: :ratings
+  has_many :memberships, dependent: :destroy
+  has_many :beer_clubs, through: :memberships
 
-	has_many :memberships, dependent: :destroy
-	has_many :beer_clubs, through: :memberships
+  validates :username, uniqueness: true,
+                       length: { in: 3..15 }
 
+  validates :password, length: { minimum: 4 }
 
-	validates :username, uniqueness: true,
-						length: { minimum: 3, maximum: 15 }
+  validates :password, format: { with: /\d.*[A-Z]|[A-Z].*\d/,  message: "has to contain one number and one upper case letter" }
 
-	validates :password, :format => {:with => /[A-Z]/,
-                          message: "must have atleast one capitalized character"}
-	validates :password, :format => {:with => /[0-9]/,
-                          message: "must have atleast one number"}
-    validates :password, length: { minimum: 4 }
-
+  def self.most_active(n)
+    sorted_by_rating_in_desc_order = User.all.select{ |u| u.ratings.any? }.sort_by{ |u| -(u.ratings.count) }
+    sorted_by_rating_in_desc_order[0..(n-1)]
+  end
 
   def favorite_beer
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer
   end
 
-
-  def favorite_style
+  def favorite(category)
     return nil if ratings.empty?
-    
-    style_scores = {}
 
-    ratings.each do |r|
-      if style_scores[r.beer.style].nil?
-        style_scores[r.beer.style] = average_for_style(r.beer.style)
-      end
+    categroy_ratings = rated(category).inject([]) do |set, item|
+      set << {
+        item: item,
+        rating: rating_of(category, item) }
     end
 
-    style_scores.sort_by {|style, score| score}.last.first
-  end
-
-  def average_for_style(style)
-    style_ratings = ratings.find_all{ |r| r.beer.style == style}   
-    style_ratings.map{ |r| r.score }.sum / style_ratings.count.to_f
+    categroy_ratings.sort_by { |item| item[:rating] }.last[:item]
   end
 
   def favorite_brewery
-    return nil if ratings.empty?
-    
-    brewery_scores = {}
+    favorite :brewery
+  end
 
-    ratings.each do |r|
-      if brewery_scores[r.beer.brewery].nil?
-        brewery_scores[r.beer.brewery] = average_for_brewery(r.beer.brewery)
-      end
+  def favorite_style
+    favorite :style
+  end
+
+  def rated(category)
+    ratings.map{ |r| r.beer.send(category) }.uniq
+  end
+
+  def rating_of(category, item)
+    ratings_of_item = ratings.select do |r|
+      r.beer.send(category) == item
     end
-
-    brewery_scores.sort_by {|brewery, score| score}.last.first
+    ratings_of_item.map(&:score).sum / ratings_of_item.count
   end
 
-  def average_for_brewery(brewery)
-    brewery_ratings = ratings.find_all{ |r| r.beer.brewery == brewery}
-    brewery_ratings.map{ |r| r.score}.sum / brewery_ratings.count.to_f
+  def rating_of_style(style)
+    rating_of :style, style
   end
 
-  def self.most_active(n)
-    unless User.all.empty?
-      sorted_by_rating_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count||0) }
-      sorted_by_rating_in_desc_order.first(n)
-    else
-      return []
-    end
+  def rating_of_brewery(brewery)
+    rating_of :brewery, brewery
   end
 
+  def rated_breweries
+    rated :brewery
+  end
 
+  def rated_styles
+    rated :style
+  end
 end

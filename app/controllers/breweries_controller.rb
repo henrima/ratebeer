@@ -1,13 +1,11 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]  
- # before_filter :authenticate, only: [:destroy]
-  before_action :ensure_that_admin, only: [:destroy] 
+  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_admin, only: [:destroy]
 
   # GET /breweries
   # GET /breweries.json
   def index
-    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
   end
@@ -26,15 +24,6 @@ class BreweriesController < ApplicationController
   def edit
   end
 
-  def toggle_activity
-    brewery = Brewery.find(params[:id])
-    brewery.update_attribute :active, (not brewery.active)
-
-    new_status = brewery.active? ? "active" : "retired"
-
-    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
-  end
-
   # POST /breweries
   # POST /breweries.json
   def create
@@ -49,7 +38,6 @@ class BreweriesController < ApplicationController
         format.json { render json: @brewery.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # PATCH/PUT /breweries/1
@@ -74,18 +62,18 @@ class BreweriesController < ApplicationController
       format.html { redirect_to breweries_url, notice: 'Brewery was successfully destroyed.' }
       format.json { head :no_content }
     end
-
   end
 
+  def toggle_activity
+    brewery = Brewery.find(params[:id])
+    brewery.update_attribute :active, (not brewery.active)
 
-   private
-#    def authenticate
-#        admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
-#        authenticate_or_request_with_http_basic do |username, password|
-#        admin_accounts.has_key?(username) and admin_accounts[username] == password
-#      end
-#    end
+    new_status = brewery.active? ? "active" : "retired"
 
+    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+  end
+
+  private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_brewery
