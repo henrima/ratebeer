@@ -1,9 +1,9 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
-  before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
+  before_action :breweries_and_styles, only: [:new, :edit, :create]
   before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :ensure_that_admin, only: [:destroy]
-
+  
   # GET /beers
   # GET /beers.json
   def index
@@ -23,9 +23,14 @@ class BeersController < ApplicationController
   end
 
   # GET /beers/1/edit
-  def edit
-    @breweries = Brewery.all
+  def edit 
   end
+
+  def breweries_and_styles
+    @breweries = Brewery.all
+    @styles = Style.all
+  end
+
 
   # POST /beers
   # POST /beers.json
@@ -68,11 +73,6 @@ class BeersController < ApplicationController
   end
 
   private
-    def set_breweries_and_styles_for_template
-      @breweries = Brewery.all
-      @styles = Style.all
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_beer
       @beer = Beer.find(params[:id])

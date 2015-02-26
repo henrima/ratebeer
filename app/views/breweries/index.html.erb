@@ -11,6 +11,7 @@
 <p> Number of retired breweries: <%= @retired_breweries.count %> </p>
 
 <%= render 'list', breweries: @retired_breweries %>
+
 <br>
 
-<%= link_to 'New Brewery', new_brewery_path, class:'btn btn-primary' if current_user %>
+<%= link_to 'New Brewery', new_brewery_path if not current_user.nil? %>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ratebeer</title>
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+  <script src="/assets/application.js" data-turbolinks-track="true"></script>
+  
+</head>
+<body>
+
+
+  	<div class="navibar">
+    	<a href="/breweries">breweries</a>
+      /
+	    <a href="/beers">beers</a>
+      /
+    	<a href="/ratings">ratings</a>
+      /
+   	  <a href="/signin">sign in</a>
+      /
+    	<a rel="nofollow" data-method="delete" href="/signout">sign out</a>
+      /
+      <a href="/users">all users</a>
+      /
+      <a href="/memberships/new">join a club</a>
+      /
+      <a href="/beer_clubs">all beerclubs</a>
+        no user logged in
+    </div>
+  	
+
+
+
+<h1>New Beer</h1>
+
+<form class="new_beer" id="new_beer" action="/beers" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+
+  <div class="field">
+    <label for="beer_name">Name</label>
+    <input type="text" name="beer[name]" id="beer_name" />
+  </div>
+  <div class="field">
+    <select name="beer[style]" id="beer_style"><option value="Weizen">Weizen</option>
+<option value="Lager">Lager</option>
+<option value="Pale ale">Pale ale</option>
+<option value="IPA">IPA</option>
+<option value="Porter">Porter</option></select>
+  </div>
+  <div class="field">
+    <select name="beer[brewery_id]" id="beer_brewery_id"><option value="1">anonymous</option></select>
+  </div>
+  <div class="actions">
+    <input type="submit" name="commit" value="Create Beer" />
+  </div>
+</form>
+
+<a href="/beers">Back</a>
+
+
+</body>
+</html>

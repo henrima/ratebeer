@@ -1,0 +1,26 @@
+<h1>Listing ratings</h1>
+<p> Number of ratings: <%= @ratings.count %> </p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Beer</th>
+      <th>Brewery</th>
+      <th>Rating</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ratings.each do |rating| %>
+      <tr>
+        <td><%= rating.beer.name %></td>
+        <td><%= rating.beer.brewery.name %></td>
+        <td><%= rating.score %></td>
+        <td><%= link_to 'Show', rating.beer %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

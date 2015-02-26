@@ -1,8 +1,11 @@
-<h2><%= @place.name %></h2>
-
 <p>
-  <%= @place.street %>
-  <%= @place.city %>
+  <h2><%= @place.name %> (<%= @place.status %>)<br></h2>
+  <strong>Address:</strong><%= @place.street %>, <%= @place.city %><br>
+  <strong>Phone:</strong><%= @place.phone %><br>  
 </p>
 
-<iframe src="<%= @place.blogmap %>"></iframe>
+<p>
+	<iframe width="400" height="400" src="<%= (@place.blogmap) %>"></iframe>
+</p>
+
+

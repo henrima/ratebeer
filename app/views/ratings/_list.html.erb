@@ -1,19 +1,17 @@
-<h4>Best <%= title %></h4>
-
 <table class="table table-hover">
-  <thead>
-    <tr>
-      <th></th>
-      <th>average</th>
-    </tr>
-  </thead>
-
   <tbody>
-    <% objects.each do |object| %>
+  <% x.each do |y| %>
       <tr>
-        <td><%= link_to object.name, object %></td>
-        <td><%= round(object.average_rating) %>
+
+      	<% if y.instance_of? User %>
+      		<td><%= y.username %></td>        	
+      		<td><%= y.ratings.count %></td>
+        <% else %>
+        	<td><%= y.name %></td>
+            <td><%= y.average_rating %></td>  	
+        <% end %>
+
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>

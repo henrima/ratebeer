@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_admin, only: [:toggle_frozen]
+  before_action :ensure_that_admin, only: [:toggle_activity]
+  before_action :ensure_that_not_deactivated, only: [:toggle_activity]
 
   # GET /users
   # GET /users.json
@@ -44,9 +45,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if user_params[:username].nil? and @user == current_user and @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.json { head :no_content }
       else
-        format.html { render :edit }
+        format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -55,23 +56,13 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if current_user == @user
-      @user.destroy
-      session[:user_id] = nil
-    end
+    @user.destroy if current_user == @user
+    current_user = nil
+    session.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def toggle_frozen
-    user = User.find(params[:id])
-    user.update_attribute :is_frozen, (not user.is_frozen)
-
-    new_status = user.is_frozen? ? "frozen" : "melted"
-
-    redirect_to :back, notice: "user account #{new_status}"
   end
 
   private
@@ -82,6 +73,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+       params.require(:user).permit(:username, :password, :password_confirmation)
     end
+
 end

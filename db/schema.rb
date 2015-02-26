@@ -11,61 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212165305) do
+ActiveRecord::Schema.define(version: 20150220133902) do
 
-  create_table "beer_clubs", force: true do |t|
-    t.string   "name"
+  create_table "beer_clubs", force: :cascade do |t|
+    t.text     "name"
     t.integer  "founded"
-    t.string   "city"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "beers", force: true do |t|
+  add_index "beer_clubs", ["name"], name: "index_beer_clubs_on_name", unique: true
+
+  create_table "beers", force: :cascade do |t|
     t.string   "name"
     t.integer  "brewery_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "style_id"
   end
 
-  create_table "breweries", force: true do |t|
+  create_table "breweries", force: :cascade do |t|
     t.string   "name"
     t.integer  "year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean  "active"
   end
 
-  create_table "memberships", force: true do |t|
-    t.integer  "user_id"
+  create_table "memberships", force: :cascade do |t|
     t.integer  "beer_club_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  create_table "ratings", force: true do |t|
+  add_index "memberships", ["beer_club_id"], name: "index_memberships_on_beer_club_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
+
+  create_table "ratings", force: :cascade do |t|
     t.integer  "score"
     t.integer  "beer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
 
-  create_table "styles", force: true do |t|
+  create_table "styles", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest"
-    t.boolean  "admin"
-    t.boolean  "is_frozen"
+    t.boolean  "admin",           default: false
+    t.boolean  "deactivated",     default: false
   end
 
 end
